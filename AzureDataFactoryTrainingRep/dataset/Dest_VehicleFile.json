@@ -1,5 +1,5 @@
 {
-	"name": "VehicleFile",
+	"name": "Dest_VehicleFile",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
