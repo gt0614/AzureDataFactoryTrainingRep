@@ -40,13 +40,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "VehicleFile",
+						"referenceName": "Dest_VehicleFile",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "SourceVehicleFile",
 						"type": "DatasetReference"
 					}
 				]
