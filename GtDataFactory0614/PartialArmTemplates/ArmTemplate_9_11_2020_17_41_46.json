@@ -1,0 +1,47 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "GtDataFactory0614"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/GtsOnPrem')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"DBName": {
+						"type": "String",
+						"defaultValue": "master"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"userName": "au\\gerhard.taute",
+					"password": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1selfhosted",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
