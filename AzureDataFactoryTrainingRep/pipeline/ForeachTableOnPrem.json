@@ -46,8 +46,8 @@
 					"isSequential": false,
 					"activities": [
 						{
-							"name": "GetAllTablesContent",
-							"type": "SqlServerStoredProcedure",
+							"name": "Copy data1",
+							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
@@ -58,51 +58,59 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"storedProcedureName": "[dbo].[USP_GetAllTablesContent]",
-								"storedProcedureParameters": {
-									"DatabaseName": {
-										"value": "AdventureWorks2017",
-										"type": "String"
-									},
-									"SchemaTable": {
-										"value": {
-											"value": "@activity('Lookup1').output.Value",
-											"type": "Expression"
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderStoredProcedureName": "[dbo].[USP_GetAllTablesContent]",
+									"storedProcedureParameters": {
+										"DatabaseName": {
+											"type": "String",
+											"value": "AdventureWorks2017"
 										},
-										"type": "String"
+										"SchemaTable": {
+											"type": "String",
+											"value": {
+												"value": "@activity('Lookup1').output.Value",
+												"type": "Expression"
+											}
+										}
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
 									}
 								}
 							},
-							"linkedServiceName": {
-								"referenceName": "GtsOnPrem",
-								"type": "LinkedServiceReference",
-								"parameters": {
-									"DBName": "ControlDB"
-								}
-							}
-						},
-						{
-							"name": "Copy data1",
-							"type": "Copy",
-							"dependsOn": [
+							"inputs": [
 								{
-									"activity": "GetAllTablesContent",
-									"dependencyConditions": [
-										"Succeeded"
-									]
+									"referenceName": "OnPremSQLControlDB",
+									"type": "DatasetReference",
+									"parameters": {
+										"DBName": "ControlDB"
+									}
 								}
 							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"enableStaging": false
-							}
+							"outputs": [
+								{
+									"referenceName": "Parquet1",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
