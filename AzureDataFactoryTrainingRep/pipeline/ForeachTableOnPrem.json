@@ -29,7 +29,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEachTable",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -71,7 +71,7 @@
 										"SchemaTable": {
 											"type": "String",
 											"value": {
-												"value": "@activity('Lookup1').output.Value",
+												"value": "@item().SchemaTable",
 												"type": "Expression"
 											}
 										}
