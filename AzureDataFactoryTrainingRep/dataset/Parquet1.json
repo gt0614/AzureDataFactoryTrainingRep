@@ -5,11 +5,27 @@
 			"referenceName": "AzureDataLakeStorage2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileName": {
+				"type": "String"
+			},
+			"FileNames": {
+				"type": "String"
+			},
+			"FileTableName": {
+				"type": "String",
+				"defaultValue": "Test"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
 				"folderPath": "Input",
 				"fileSystem": "gtadlsgen2con"
 			},
