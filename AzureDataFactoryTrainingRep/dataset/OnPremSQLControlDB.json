@@ -3,7 +3,18 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "GtsOnPrem",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": {
+					"value": "@dataset().DBName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DBName": {
+				"type": "String"
+			}
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
