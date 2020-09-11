@@ -86,7 +86,8 @@
 										"copyBehavior": "PreserveHierarchy"
 									},
 									"formatSettings": {
-										"type": "ParquetWriteSettings"
+										"type": "ParquetWriteSettings",
+										"maxRowsPerFile": 10
 									}
 								},
 								"enableStaging": false,
@@ -116,8 +117,7 @@
 										"FileName": {
 											"value": "@item().SchemaTable",
 											"type": "Expression"
-										},
-										"FileTableName": "Test"
+										}
 									}
 								}
 							]
