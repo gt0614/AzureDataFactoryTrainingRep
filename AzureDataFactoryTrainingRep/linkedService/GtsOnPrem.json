@@ -2,12 +2,18 @@
 	"name": "GtsOnPrem",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"DBName": {
+				"type": "String",
+				"defaultValue": "master"
+			}
+		},
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=AUD-5CG8122P11\\SQL2019;initial catalog=ControlDB",
+			"connectionString": "integrated security=True;data source=AUD-5CG8122P11\\SQL2019;initial catalog=@{linkedService().DBName}",
 			"userName": "au\\gerhard.taute",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxNzJmOTliMC02YjcyLTQ5NDYtYmQ4MS0xMTY0YTIxYjkxZmYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxMjhhZTMwYi1jYThmLTRiNGEtOWQzZi1kYTBlMDYzOTFhNTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1selfhosted",
