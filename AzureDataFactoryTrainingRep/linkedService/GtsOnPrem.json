@@ -1,0 +1,17 @@
+{
+	"name": "GtsOnPrem",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=AUD-5CG8122P11\\SQL2019;initial catalog=AdventureWorks2017",
+			"userName": "au\\gerhard.taute",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiYTA4YmY0Zi1kMWE3LTQ0ZTgtOGVjOC0wOGZjNzUzMmIwNTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1selfhosted",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
