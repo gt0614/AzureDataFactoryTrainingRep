@@ -8,13 +8,6 @@
 		"parameters": {
 			"FileName": {
 				"type": "String"
-			},
-			"FileNames": {
-				"type": "String"
-			},
-			"FileTableName": {
-				"type": "String",
-				"defaultValue": "Test"
 			}
 		},
 		"annotations": [],
