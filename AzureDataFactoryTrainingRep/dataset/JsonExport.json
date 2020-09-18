@@ -21,10 +21,6 @@
 				},
 				"folderPath": "Input",
 				"fileSystem": "gtadlsgen2con"
-			},
-			"compression": {
-				"type": "gzip",
-				"level": "Optimal"
 			}
 		}
 	}
