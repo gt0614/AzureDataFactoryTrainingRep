@@ -19,7 +19,6 @@
 				"fileSystem": "gtadlsgen2con"
 			},
 			"columnDelimiter": "|",
-			"compressionCodec": "gzip",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
