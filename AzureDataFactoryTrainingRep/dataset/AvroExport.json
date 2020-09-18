@@ -1,5 +1,5 @@
 {
-	"name": "Avro1",
+	"name": "AvroExport",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage2",
