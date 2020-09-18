@@ -110,12 +110,8 @@
 									"referenceName": "ParquetExport",
 									"type": "DatasetReference",
 									"parameters": {
-										"SchemaName": {
-											"value": "@item().SchemaName",
-											"type": "Expression"
-										},
-										"TableName": {
-											"value": "@item().TableName",
+										"FileName": {
+											"value": "@concat(item().SchemaName,'_',item().TableName)",
 											"type": "Expression"
 										}
 									}
