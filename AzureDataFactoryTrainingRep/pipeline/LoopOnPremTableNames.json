@@ -73,7 +73,8 @@
 								"sink": {
 									"type": "AvroSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+										"type": "AzureBlobFSWriteSettings",
+										"copyBehavior": "FlattenHierarchy"
 									},
 									"formatSettings": {
 										"type": "AvroWriteSettings"
