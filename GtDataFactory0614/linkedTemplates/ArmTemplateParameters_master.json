@@ -11,26 +11,26 @@
 		"AzureBlobStorage2_connectionString": {
 			"value": ""
 		},
-		"GtsOnPrem_connectionString": {
-			"value": ""
-		},
-		"GtsOnPrem_password": {
-			"value": ""
-		},
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
 		"AzureDataLakeStorage2_accountKey": {
 			"value": ""
 		},
-		"GtsOnPrem_properties_typeProperties_userName": {
-			"value": "au\\gerhard.taute"
+		"GtsOnPrem_connectionString": {
+			"value": ""
+		},
+		"GtsOnPrem_password": {
+			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://gtadlsgen2.dfs.core.windows.net"
 		},
 		"AzureDataLakeStorage2_properties_typeProperties_url": {
 			"value": "https://gtadlsgen2.dfs.core.windows.net"
+		},
+		"GtsOnPrem_properties_typeProperties_userName": {
+			"value": "au\\gerhard.taute"
 		},
 		"containerUri": {
 			"value": ""
