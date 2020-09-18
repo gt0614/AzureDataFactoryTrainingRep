@@ -1,5 +1,5 @@
 {
-	"name": "ControlDB",
+	"name": "TableList",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "GtsOnPrem",
