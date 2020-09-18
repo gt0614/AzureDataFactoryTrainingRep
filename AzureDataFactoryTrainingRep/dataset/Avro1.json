@@ -18,7 +18,9 @@
 				"fileName": {
 					"value": "@dataset().FileName",
 					"type": "Expression"
-				}
+				},
+				"folderPath": "Input",
+				"fileSystem": "gtadlsgen2con"
 			}
 		}
 	}
