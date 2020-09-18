@@ -1,0 +1,17 @@
+{
+	"name": "SQLTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GtsOnPrem",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"D": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
