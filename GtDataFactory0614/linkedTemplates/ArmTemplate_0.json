@@ -180,7 +180,106 @@
 						"folderPath": "Input",
 						"fileSystem": "gtadlsgen2con"
 					},
-					"compressionCodec": "gzip"
+					"compressionCodec": "none"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AvroExport')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Avro",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": "Input",
+						"fileSystem": "gtadlsgen2con"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JsonExport')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": "Input",
+						"fileSystem": "gtadlsgen2con"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CSVDelimitedExport')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "Input/CSV",
+						"fileSystem": "gtadlsgen2con"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
 				},
 				"schema": []
 			},
@@ -238,13 +337,21 @@
 				"linkedServiceName": {
 					"referenceName": "GtsOnPrem",
 					"type": "LinkedServiceReference",
-					"parameters": {}
+					"parameters": {
+						"DBName": {
+							"value": "@dataset().DatabaseName",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"SchemaName": {
 						"type": "string"
 					},
 					"TableName": {
+						"type": "string"
+					},
+					"DatabaseName": {
 						"type": "string"
 					}
 				},
@@ -342,12 +449,14 @@
 											"partitionOption": "None"
 										},
 										"sink": {
-											"type": "ParquetSink",
+											"type": "DelimitedTextSink",
 											"storeSettings": {
 												"type": "AzureBlobFSWriteSettings"
 											},
 											"formatSettings": {
-												"type": "ParquetWriteSettings"
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
 											}
 										},
 										"enableStaging": false,
@@ -372,17 +481,21 @@
 												"TableName": {
 													"value": "@item().TableName",
 													"type": "Expression"
+												},
+												"DatabaseName": {
+													"value": "@item().DatabaseName",
+													"type": "Expression"
 												}
 											}
 										}
 									],
 									"outputs": [
 										{
-											"referenceName": "ParquetExport",
+											"referenceName": "CSVDelimitedExport",
 											"type": "DatasetReference",
 											"parameters": {
 												"FileName": {
-													"value": "@concat(item().SchemaName,'_',item().TableName)",
+													"value": "@concat(item().SchemaName,'_',item().TableName,'.csv')",
 													"type": "Expression"
 												}
 											}
@@ -398,7 +511,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/TableList')]",
 				"[concat(variables('factoryId'), '/datasets/SQLTable')]",
-				"[concat(variables('factoryId'), '/datasets/ParquetExport')]"
+				"[concat(variables('factoryId'), '/datasets/CSVDelimitedExport')]"
 			]
 		}
 	]

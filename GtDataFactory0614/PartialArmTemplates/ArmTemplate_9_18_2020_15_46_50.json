@@ -6,154 +6,12 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "GtDataFactory0614"
-		},
-		"AzureBlobStorage1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
-		"AzureBlobStorage2_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
-		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
-		},
-		"AzureDataLakeStorage2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
-		},
-		"GtsOnPrem_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'GtsOnPrem'"
-		},
-		"GtsOnPrem_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'GtsOnPrem'"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://gtadlsgen2.dfs.core.windows.net"
-		},
-		"AzureDataLakeStorage2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://gtadlsgen2.dfs.core.windows.net"
-		},
-		"GtsOnPrem_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "au\\gerhard.taute"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1selfhosted",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1selfhosted')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GtsOnPrem')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"DBName": {
-						"type": "String",
-						"defaultValue": "master"
-					}
-				},
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('GtsOnPrem_connectionString')]",
-					"userName": "[parameters('GtsOnPrem_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('GtsOnPrem_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1selfhosted",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1selfhosted')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1selfhosted')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LoopOnPremTableNames')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -186,8 +44,7 @@
 							},
 							"dataset": {
 								"referenceName": "TableList",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"firstRowOnly": false
 						}
@@ -290,51 +147,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TableList')]",
 				"[concat(variables('factoryId'), '/datasets/SQLTable')]",
 				"[concat(variables('factoryId'), '/datasets/CSVDelimitedExport')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TableList')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "GtsOnPrem",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"DBName": "Controldb"
-					}
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DatabaseName",
-						"type": "varchar"
-					},
-					{
-						"name": "SchemaName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "TableName",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "AzureUploadTables"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/GtsOnPrem')]"
 			]
 		},
 		{
@@ -377,9 +191,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/GtsOnPrem')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ParquetExport')]",
@@ -411,9 +223,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AvroExport')]",
@@ -441,12 +251,9 @@
 						"folderPath": "Input",
 						"fileSystem": "gtadlsgen2con"
 					}
-				},
-				"schema": {}
+				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/JsonExport')]",
@@ -474,12 +281,9 @@
 						"folderPath": "Input",
 						"fileSystem": "gtadlsgen2con"
 					}
-				},
-				"schema": {}
+				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CSVDelimitedExport')]",
@@ -510,9 +314,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage2')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
