@@ -71,24 +71,15 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "AvroSink",
+									"type": "JsonSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings",
-										"copyBehavior": "FlattenHierarchy"
+										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
-										"type": "AvroWriteSettings"
+										"type": "JsonWriteSettings"
 									}
 								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
@@ -112,7 +103,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Avro1",
+									"referenceName": "JsonExport",
 									"type": "DatasetReference",
 									"parameters": {
 										"FileName": {
