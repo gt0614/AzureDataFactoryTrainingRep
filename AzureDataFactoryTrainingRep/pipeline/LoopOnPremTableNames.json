@@ -15,7 +15,8 @@
 				},
 				"userProperties": [
 					{
-						"name": "DatabaseName"
+						"name": "DatabaseName",
+						"value": "ControlDB"
 					}
 				],
 				"typeProperties": {
