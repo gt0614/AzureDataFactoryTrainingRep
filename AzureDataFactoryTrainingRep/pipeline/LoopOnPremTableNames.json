@@ -101,6 +101,10 @@
 										"TableName": {
 											"value": "@item().TableName",
 											"type": "Expression"
+										},
+										"DatabaseName": {
+											"value": "@item().DatabaseName",
+											"type": "Expression"
 										}
 									}
 								}
