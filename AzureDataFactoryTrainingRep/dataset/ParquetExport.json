@@ -22,7 +22,7 @@
 				"folderPath": "Input",
 				"fileSystem": "gtadlsgen2con"
 			},
-			"compressionCodec": "gzip"
+			"compressionCodec": "none"
 		},
 		"schema": []
 	}
