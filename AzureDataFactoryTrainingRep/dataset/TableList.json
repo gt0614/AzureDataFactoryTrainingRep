@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "GtsOnPrem",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": "Controldb"
+			}
 		},
 		"annotations": [],
 		"type": "SqlServerTable",
